@@ -38,7 +38,7 @@ const Page = () => {
     setMessages((prevMessages) => [
       ...prevMessages,
       { sender: 'user', text: userMessage },
-      { sender: 'omega', text: 'Omega: I received your message!' },  // Simple Omega response
+      { sender: 'omega', text: 'Romega: I received your message!' },  // Simple Omega response
     ]);
   };
 

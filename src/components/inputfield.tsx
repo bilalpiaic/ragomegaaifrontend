@@ -1,10 +1,10 @@
 "use client"
 import React, { useState } from 'react';
 
-const Inputfield = ({ saveInput }) => {
+const Inputfield = ({ saveInput }:any) => {
   const [inputValue, setInputValue] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     setInputValue(e.target.value);
   };
 
@@ -21,7 +21,7 @@ const Inputfield = ({ saveInput }) => {
         <input
           className="w-full border-2 border-gray-300 focus:border-blue-500 rounded-full py-3 px-5 bg-gray-100 text-gray-700 focus:outline-none font-semibold placeholder-gray-500 transition duration-300 ease-in-out"
           type="text"
-          placeholder="Message Omega"
+          placeholder="Message Romega"
           name="input"
           id="input"
           value={inputValue}
