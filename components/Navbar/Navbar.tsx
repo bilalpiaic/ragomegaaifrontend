@@ -67,7 +67,7 @@ const Navbar = () => {
             </div>
             <div>
               <div className=''>
-                <div className="py-1"><Link className='flex items-center gap-x-2' href="/login"><TbLogin2 />Login</Link></div>
+                <div className="py-1"><Link className='flex items-center gap-x-2' href={"/login"}><TbLogin2 />Login</Link></div>
               </div>
               <div className='hidden'>
                 <div className="py-1"><Link className='flex items-center gap-x-2' href="/"><LuUser />Profile</Link></div>
