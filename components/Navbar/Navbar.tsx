@@ -61,18 +61,18 @@ const Navbar = () => {
           <RxCross2 onClick={hideSidebar} className="mobile:mt-6 tablet:mt-12 absolute right-3 tablet:right-8 text-4xl cursor-pointer hover:scale-[1.2] transition-transform ease-in-out duration-150" />
           <div className='flex flex-col gap-y-52'>
             <div>
-              <div className="py-1 mt-20"><Link className='flex items-center gap-x-2' href="/"><RiHome2Line />Home</Link></div>
-              <div className="py-1"><Link className='flex items-center gap-x-2' href="/about"><HiOutlineDocument />About</Link></div>
-              <div className="py-1"><Link className='flex items-center gap-x-2' href="/contact"><RiContactsBook3Line />Contact</Link></div>
+              <div onClick={hideSidebar} className="py-1 mt-20"><Link className='flex items-center gap-x-2' href="/"><RiHome2Line />Home</Link></div>
+              <div onClick={hideSidebar} className="py-1"><Link className='flex items-center gap-x-2' href="/about"><HiOutlineDocument />About</Link></div>
+              <div onClick={hideSidebar} className="py-1"><Link className='flex items-center gap-x-2' href="/contact"><RiContactsBook3Line />Contact</Link></div>
             </div>
             <div>
               <div className=''>
-                <div className="py-1"><Link className='flex items-center gap-x-2' href="/login"><TbLogin2 />Login</Link></div>
+                <div onClick={hideSidebar} className="py-1"><Link className='flex items-center gap-x-2' href={"/login"}><TbLogin2 />Login</Link></div>
               </div>
               <div className=''>
-                <div className="py-1"><Link className='flex items-center gap-x-2' href="/"><LuUser />Profile</Link></div>
-                <div className="py-1"><Link className='flex items-center gap-x-2' href="/"><FiShoppingBag />Orders</Link></div>
-                <div className="py-1"><Link className='flex items-center gap-x-2' href="/"><TbLogout2 />Logout</Link></div>
+                <div onClick={hideSidebar} className="py-1"><Link className='flex items-center gap-x-2' href="/"><LuUser />Profile</Link></div>
+                <div onClick={hideSidebar} className="py-1"><Link className='flex items-center gap-x-2' href="/"><FiShoppingBag />Orders</Link></div>
+                <div onClick={hideSidebar} className="py-1"><Link className='flex items-center gap-x-2' href="/"><TbLogout2 />Logout</Link></div>
               </div>
             </div>
           </div>
