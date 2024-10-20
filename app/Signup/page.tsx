@@ -1,14 +1,27 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 const Signup = () => {
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: ""
+  })
+
+  const onClickHandler = ()=>{
+    // Signup code
+  }
   return (
-    <div className='flex flex-col justify-center items-center h-screen bg-white px-4'>
+    <div className='flex flex-col justify-center items-center h-screen bg-gray-100 px-4'>
       <div className='text-gray-900 text-4xl font-semibold mb-12 mt-5'>Sign Up</div>
       <div className='mb-4 w-full max-w-sm'>
         <input
+        onChange={(e:any)=>{setUser({...user, [e.target.name]: e.target.value})}}
           className='flex-grow text-left p-4 border border-black rounded-sm w-full focus:outline-none focus:ring-2 focus:ring-black transition-shadow duration-200'
           type="text"
+          name='username'
+          value={user.username}
           placeholder="Username"
           aria-label="Username" // Added aria-label for accessibility
           required // Mark as required
@@ -16,8 +29,11 @@ const Signup = () => {
       </div>
       <div className='mb-4 w-full max-w-sm'>
         <input
+        onChange={(e:any)=>{setUser({...user, [e.target.name]: e.target.value})}}
           className='flex-grow text-left p-4 border border-black rounded-sm w-full focus:outline-none focus:ring-2 focus:ring-black transition-shadow duration-200'
           type="email"
+          name='email'
+          value={user.email}
           placeholder="Email"
           aria-label="Email address" // Added aria-label for accessibility
           required // Mark as required
@@ -25,16 +41,19 @@ const Signup = () => {
       </div>
       <div className='mb-4 w-full max-w-sm'>
         <input
+        onChange={(e:any)=>{setUser({...user, [e.target.name]: e.target.value})}}
           className='flex-grow text-left p-4 border border-black rounded-sm w-full focus:outline-none focus:ring-2 focus:ring-black transition-shadow duration-200'
           type="password"
+          name='password'
+          value={user.password}
           placeholder="Password"
           aria-label="Password" // Added aria-label for accessibility
           required // Mark as required
         />
-      </div><Link href={"/"}>
-        <button className='bg-black text-white px-4 py-3 w-40 max-w-xs rounded-sm duration-300 hover:scale-105'>
+      </div>
+        <button onClick={onClickHandler} className='bg-black text-white px-4 py-3 w-40 max-w-xs rounded-sm duration-300 hover:scale-105'>
           Sign Up
-        </button></Link>
+        </button>
       <div className='mt-4'>
         <p className='text-gray-700'>
           Already have an account?{' '}
@@ -58,7 +77,7 @@ const Signup = () => {
           className="flex items-center justify-center mt-5 flex-wrap"
         >
           <button
-            className="flex items-center text-black border border-gray-300 rounded-lg shadow-md max-w-xs px-8 py-4 text-sm font-medium hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            className="flex items-center text-black border border-gray-300 rounded-lg shadow-md max-w-xs px-8 py-4 text-sm font-medium bg-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
             <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 73 73" version="1.1">
               <g id="team-collaboration/version-control/github" stroke="none" stroke-width="1" fill="none"
