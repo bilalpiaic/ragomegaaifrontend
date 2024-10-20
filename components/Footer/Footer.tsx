@@ -9,7 +9,7 @@ const Footer = () => {
             <h3 className='text-xl font-semibold text-black mobile:text-lg'>Collections</h3>
             <Link className='text-lg mobile:text-base mt-3' href={"/collections/clothing"}>Clothing</Link>
             <Link className='text-lg mobile:text-base' href={"/collections/electronics"}>Electronics</Link>
-            <Link className='text-lg mobile:text-base' href={"/collections/"}>Clothing</Link>
+            <Link className='text-lg mobile:text-base' href={"/collections/clothing"}>Clothing</Link>
           </div>
           <div className='flex flex-col justify-center items-start w-[30%] gap-y-1 mobile:hidden'>
             <h3 className='text-xl font-semibold text-black'>Info</h3>
@@ -23,7 +23,7 @@ const Footer = () => {
         </div>
         <div className='h-[1px] w-full bg-[#c2c2c2] mt-10'></div>
         <div className='mt-5 mb-5'>
-          <p>&#169; 2024 Imtiaz Mart. All rights reserved.</p>
+          <p>&#169; 2024 Omega Mart. All rights reserved.</p>
         </div>
       </footer>
   )

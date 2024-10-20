@@ -32,7 +32,7 @@ const Navbar = () => {
     <header>
         <nav className='flex justify-between px-32 items-center h-20 bg-white fixed top-0 right-0 left-0 z-10 shadow-md tablet:px-4 w-screen mobile:px-3'>
           <div>
-            <h1 className='text-2xl font-bold'>Imtiaz Mart</h1>
+            <h1 className='text-2xl font-bold'>Omega Mart</h1>
           </div>
           <div className='flex justify-center items-center gap-x-12 text-lg font-semibold mobile tablet:gap-x-5'>
             <Link className='font-medium text-[#3b3a3a] mobile:hidden' href={"/"}>Home</Link>
@@ -69,7 +69,7 @@ const Navbar = () => {
               <div className=''>
                 <div className="py-1"><Link className='flex items-center gap-x-2' href="/login"><TbLogin2 />Login</Link></div>
               </div>
-              <div className='hidden'>
+              <div className=''>
                 <div className="py-1"><Link className='flex items-center gap-x-2' href="/"><LuUser />Profile</Link></div>
                 <div className="py-1"><Link className='flex items-center gap-x-2' href="/"><FiShoppingBag />Orders</Link></div>
                 <div className="py-1"><Link className='flex items-center gap-x-2' href="/"><TbLogout2 />Logout</Link></div>
