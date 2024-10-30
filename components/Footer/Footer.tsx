@@ -3,6 +3,8 @@ import Link from 'next/link'
 
 const Footer = () => {
   return (
+    <>
+    <div className='h-[1px] w-full bg-[#c2c2c2]'></div>
     <footer className='flex flex-col justify-center items-center bg-gray-100 text-[#828282] px-5'>
         <div className='flex justify-center items-start gap-x-52 mt-14 tablet:gap-x-20 mobile:justify-between mobile:px-2 mobile:gap-x-0'>
           <div className='flex flex-col justify-center items-start w-[30%] gap-y-1 mobile:w-[50%]'>
@@ -26,6 +28,7 @@ const Footer = () => {
           <p>&#169; 2024 Omega Mart. All rights reserved.</p>
         </div>
       </footer>
+    </>
   )
 }
 

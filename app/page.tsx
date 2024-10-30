@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { MdArrowForward } from "react-icons/md";
+import { getSession } from 'next-auth/react';
 
 const Page = () => {
   const [products, setProducts] = useState([])
@@ -9,7 +10,46 @@ const Page = () => {
     fetch('https://fakestoreapi.com/products')
       .then(res => res.json())
       .then(json => setProducts(json))
+      const fetchSession = async()=>{
+        const session = await getSession()
+        console.log(session);
+        if(session){
+          if (session.user.provider === "github") {
+            const response = await fetch('/api/signup', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                username: session.user.name,
+                email: session.user.email,
+                password: null,
+                provider: session.user.provider
+              }),
+            });
+          }
+        }
+      }
+      fetchSession()
   },[])
+
+  const onClickHandler = async(id:number)=>{
+    console.log(id);
+    
+    const session = await getSession()
+    const result = await fetch(`/api/users?email=${session?.user?.email}`)
+    const temp = await result.json()
+    const response = await fetch('/api/cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId: temp,
+        productId: id
+      }),
+    });
+  }
 
   return (
     <div className='bg-gray-100'>
@@ -57,7 +97,7 @@ const Page = () => {
           {
             products!.map((item: any) => {
               return (
-                <Link href={`products/${item.id}`} className="bg-white w-[300px] overflow-hidden max-w-sm py-5 text-[#5a5757] mobile:w-[45vw] mobile:py-2">
+                <div key={item.id}className="bg-white w-[300px] overflow-hidden max-w-sm py-5 text-[#5a5757] mobile:w-[45vw] mobile:py-2">
                   <div className="relative flex justify-center">
                     <img className="h-[200px]" src={item.image} alt="Product Image" />
                     <div className="absolute bottom-0 left-0 bg-red-500 text-white px-3 py-0.5 m-2 rounded-full text-sm">Sale
@@ -68,12 +108,12 @@ const Page = () => {
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-lg mobile:text-sm">${item.price}</span>
                       <div className='flex justify-center items-center cursor-pointer'>
-                        <h3 className='mobile text-sm'>Add to cart</h3>
+                        <h3 onClick={()=>onClickHandler(item.id)} className='mobile text-sm'>Add to cart</h3>
                         <MdArrowForward className='text-2xl mobile:text-xl' />
                       </div>
                     </div>
                   </div>
-                </Link>
+                </div>
               )
             })
           }

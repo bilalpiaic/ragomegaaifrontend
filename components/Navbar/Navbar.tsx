@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { LuUser } from "react-icons/lu";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
@@ -19,6 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { getSession, signOut } from 'next-auth/react';
 
 const Navbar = () => {
     const [sidebar, setSidebar] = useState(false);
@@ -28,6 +29,19 @@ const Navbar = () => {
     let hideSidebar = () => {
       setSidebar(false);
     }
+
+    const [session, setSession] = useState<any>(null)
+
+    useEffect(()=>{
+      const fetchSession = async()=>{
+        const temp = await getSession()
+        console.log(temp);
+        
+        setSession(temp)
+      }
+      fetchSession()
+    },[])
+
   return (
     <header>
         <nav className='flex justify-between px-32 items-center h-20 bg-white fixed top-0 right-0 left-0 z-10 shadow-md tablet:px-4 w-screen mobile:px-3'>
@@ -39,7 +53,7 @@ const Navbar = () => {
             <Link className='font-medium text-[#3b3a3a] mobile:hidden' href={"/about"}>About</Link>
             <Link className='font-medium text-[#3b3a3a] mobile:hidden' href={"/contact"}>Contact</Link>
             <div className='flex justify-center items-center gap-x-4'>
-              <div className='mobile:hidden'>
+              <div style={{display: session ? "":"none"}} className='mobile:hidden'>
                 <DropdownMenu>
                   <DropdownMenuTrigger><LuUser className='text-[26px] relative top-[4px] left-[3px]' /></DropdownMenuTrigger>
                   <DropdownMenuContent>
@@ -47,12 +61,12 @@ const Navbar = () => {
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>Profile</DropdownMenuItem>
                     <DropdownMenuItem>Orders</DropdownMenuItem>
-                    <DropdownMenuItem>Logout</DropdownMenuItem>
+                    <DropdownMenuItem onClick={()=>signOut()}>Logout</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
-              <Link href={"/login"}><TbLogin2 className='text-[30.5px] cursor-pointer mobile:hidden' /></Link>
-              <Link href={"/cart"}><HiOutlineShoppingBag className='text-[27px] cursor-pointer' /></Link>
+              <Link style={{display: session ? "none":""}} href={"/login"}><TbLogin2 className='text-[30.5px] cursor-pointer mobile:hidden' /></Link>
+              <Link style={{display: session ? "":"none"}} href={"/cart"}><HiOutlineShoppingBag className='text-[27px] cursor-pointer' /></Link>
               <FaBars onClick={showSidebar} className="text-2xl hidden mobile:block cursor-pointer" />
             </div>
           </div>
@@ -66,13 +80,13 @@ const Navbar = () => {
               <div onClick={hideSidebar} className="py-1"><Link className='flex items-center gap-x-2' href="/contact"><RiContactsBook3Line />Contact</Link></div>
             </div>
             <div>
-              <div className=''>
+              <div style={{display: session ? "none":""}}>
                 <div onClick={hideSidebar} className="py-1"><Link className='flex items-center gap-x-2' href={"/login"}><TbLogin2 />Login</Link></div>
               </div>
-              <div className=''>
+              <div style={{display: session ? "":"none"}}>
                 <div onClick={hideSidebar} className="py-1"><Link className='flex items-center gap-x-2' href="/"><LuUser />Profile</Link></div>
                 <div onClick={hideSidebar} className="py-1"><Link className='flex items-center gap-x-2' href="/"><FiShoppingBag />Orders</Link></div>
-                <div onClick={hideSidebar} className="py-1"><Link className='flex items-center gap-x-2' href="/"><TbLogout2 />Logout</Link></div>
+                <div onClick={()=>signOut()} className="py-1"><Link className='flex items-center gap-x-2' href="/"><TbLogout2 />Logout</Link></div>
               </div>
             </div>
           </div>
