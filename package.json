@@ -15,6 +15,8 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.453.0",
     "next": "14.2.15",
+    "next-auth": "^4.24.8",
+    "pg": "^8.13.0",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.3.0",

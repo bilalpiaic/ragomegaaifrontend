@@ -2,22 +2,42 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import FaGitHub from "react-icons"
+import { signIn, getSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
   const [user, setUser] = useState({
     email: "",
     password: ""
   })
+  const router = useRouter()
+  
+  const [error, setError] = useState("")
 
-  const onClickHandler = () => {
+  const onChangeHandler = (e:any)=>{
+    setError("")
+    setUser({ ...user, [e.target.name]: e.target.value })
+  }
+  
+  const onClickHandler = async() => {
     // Login code
+    const result: any = await signIn("credentials", {
+      redirect: false, ...user
+    })
+    if (result.ok) {
+      router.push("/")
+    }
+    else {
+      console.log("error");
+      setError("email or password doesn't match")
+    }
   }
   return (
     <div className='flex flex-col justify-center items-center h-screen bg-gray-100 px-4'>
       <div className='text-gray-900 text-4xl font-semibold mb-12 mt-5'>Login</div>
       <div className='mb-4 w-full max-w-sm'>
         <input
-        onChange={(e:any)=>{setUser({...user, [e.target.name]: e.target.value})}}
+        onChange={onChangeHandler}
           className='flex-grow text-left p-4 border border-black rounded-sm w-full focus:outline-none focus:ring-2 focus:ring-black transition-shadow duration-200'
           type="email"
           name='email'
@@ -29,7 +49,7 @@ const Login = () => {
       </div>
       <div className='mb-4 w-full max-w-sm'>
         <input
-        onChange={(e:any)=>{setUser({...user, [e.target.name]: e.target.value})}}
+        onChange={onChangeHandler}
           className='flex-grow text-left p-4 border border-black rounded-sm w-full focus:outline-none focus:ring-2 focus:ring-black transition-shadow duration-200'
           type="password"
           name='password'
@@ -39,6 +59,7 @@ const Login = () => {
           required // Mark as required
         />
       </div>
+      <h3 className="text-red-500 mb-3 relative right-14 mobile:right-0">{error}</h3>
         <button onClick={onClickHandler} className='bg-black text-white p-x-4 py-3 w-40 max-w-xs rounded-sm duration-300 hover:scale-105'>
           Login
         </button>
@@ -66,6 +87,7 @@ const Login = () => {
           className="flex items-center justify-center mt-5 flex-wrap"
         >
           <button
+          onClick={()=>signIn("github")}
             className="flex items-center text-black border border-gray-300 rounded-lg shadow-md max-w-xs px-8 py-4 text-sm font-medium bg-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
             <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 73 73" version="1.1">
